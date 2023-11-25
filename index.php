@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +7,17 @@
     <link rel="stylesheet" href="main.css">
     <link href="./favicon.ico" rel="icon" type="image/x-icon">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 </head>
 
-<body class="flex flex-col min-h-screen font-sans text-base leading-normal text-slate-600">
+<body class="flex flex-col min-h-screen pt-14 font-sans text-base leading-normal text-slate-600">
     <?php include './header.php'; ?>
 
     <?php
         $books = array(
-            'Torah' => './torah/torah.php',
-            'Nevi\'im - Prophètes' => './prophetes/prophetes.php',
-            'Ketouvim - Hagiographes' => './hagiographes/hagiographes.php');
+            'Torah' => './torah.php',
+            'Nevi\'im - Prophètes' => './prophetes.php',
+            'Ketouvim - Hagiographes' => './hagiographes.php');
     ?>
 
     <main class="flex-1 w-screen max-w-[80ch] px-4 mx-auto my-clamp">
@@ -33,5 +33,6 @@
     </main>
 
     <?php include './footer.php'; ?>
+    <script src="app.js"></script>
 </body>
 </html>

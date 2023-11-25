@@ -1,64 +1,21 @@
-$(function() {
+const DateTime = luxon.DateTime;
 
-    const baseUrl = window.location.origin+window.location.pathname;
+const dtHb = DateTime.now().reconfigure({ outputCalendar: "hebrew" }).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'});
+const cleanDtHb = dtHb.replace('A. M.', '')
+document.getElementById('dtHb').innerText = cleanDtHb;
 
-    $(document).on('click', '.navigation a', function(){
-        const selector = this.getAttribute('href');
-        const selectorCleaned = selector.replace('#', '');
+const dtFr = DateTime.now().setLocale('fr').toLocaleString(DateTime.DATE_FULL);
+document.getElementById('dtFr').innerText = dtFr;
 
-        $('#custom').empty();
+///
+/*
+const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+};
 
-        $('#content').empty();
-        $('#content').load(`./tehilims/${selectorCleaned}.php`);
-
-        $('.navigation a').removeClass('active');
-        $(this).addClass('active');
-        $(selector).addClass('active');
-
-
-        $('.sub-navigation').addClass('active');
-
-        $('.sublink-psaume').addClass('active');
-        $('.sublink-traduction').removeClass('active');
-    });
-
-
-    $('.sublink').each(function(){
-        $(this).on('click', function(){
-            const selector = this.getAttribute('href');
-
-            $('.sublink').removeClass('active');
-            $(this).addClass('active');
-            $('.tehilim-block.active').removeClass('active');
-            $(`.tehilim ${selector}`).addClass('active');
-        });
-    });
-
-
-    $('select').on('change', function() {
-
-        const selectedValue = this.value;
-
-        $('#select').empty();
-        $('#content').empty();
-
-        if(selectedValue === 'custom') {
-            $('.sub-navigation').removeClass('active');
-            $('#custom').load(`./navigation.php`);
-        } else if (selectedValue === 'select') {
-            $('#custom').empty();
-            $('#select').load(`./select.php`);
-        } else {
-            $('#custom').empty();
-            $('#content').load(`./tehilims/${selectedValue}.php`);
-            $('.sub-navigation').addClass('active');
-        }
-
-        $('.sublink-psaume').addClass('active');
-        $('.sublink-traduction').removeClass('active');
-    })
-});
-
-document.addEventListener('', function() {
-    
-})
+const currentDate = new Date().toLocaleDateString('fr', options);
+console.log('currentDate :', currentDate);
+*/
