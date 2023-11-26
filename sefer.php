@@ -19,7 +19,7 @@
 
     <?php // Sefer ?>
     <div x-show="open"
-         id="top"
+         x-ref="top"
          class="fixed top-14 bottom-0 inset-x-0 h-[calc(100%-theme(space.14))] overflow-y-auto bg-white">
          <div class="flex justify-end w-screen max-w-[80ch] px-4 mx-auto mt-clamp">
             <button
@@ -56,7 +56,7 @@
                             </template>
                         </div>
                         <div class="flex justify-center pt-6 mt-6 border-t border-slate-200">
-                            <button @click="backToTop"
+                            <button @click="$refs.top.scrollTo({top: 0, behavior: 'smooth'})"
                             class="py-2.5 px-4 border border-slate-200 rounded text-sm transition-colors hover:border-slate-400">Retour en haut de page</button>
                         </div>
                     </div>
@@ -103,10 +103,6 @@
 
             chapterActive (chapter) {
                 return chapter === this.chapter;
-            },
-
-            backToTop: function() {
-                document.getElementById('top').scrollTo({top: 0, behavior: 'smooth'})
             }
         }));
     });
