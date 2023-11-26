@@ -109,10 +109,10 @@
             url: './prophetes/tsephania.json'
         },
         {
-            id: 'Haggai',
+            id: 'haggai',
             name: 'Haggaï - Aggée',
             resume: 'Des appels urgents à construire le second temple et des descriptions de sa gloire future.',
-            url: './prophetes/Haggai.json'
+            url: './prophetes/haggai.json'
         },
         {
             id: 'zekharia',

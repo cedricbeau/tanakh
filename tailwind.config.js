@@ -8,9 +8,6 @@ module.exports = {
     ],
   theme: {
     extend: {
-        colors: {
-            blueIsrael: '#005EB8',
-        },
         fontSize: {
             clampSm: "clamp(0.8rem, 0.42vw + 0.69rem, 1.03rem)",
             clampBase: "clamp(1rem, 0.68vw + 0.83rem, 1.38rem)",

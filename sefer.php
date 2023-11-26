@@ -10,7 +10,7 @@
                     :data-sefer="'sefer-' + sefer.id"
                     @click="loadSefer(sefarim[index].url); openSefer()"
                     class="group text-left">
-                    <span class="block mb-1.5 font-semibold text-slate-800" x-text="sefer.name"></span>
+                    <span class="block mb-1.5 font-serif text-lg font-medium text-slate-800" x-text="sefer.name"></span>
                     <span class="text-sm transition-colors group-hover:text-slate-400" x-text="sefer.resume"></span>
                 </button>
             </li>
@@ -21,6 +21,7 @@
     <div x-show="open"
          x-ref="top"
          class="fixed top-14 bottom-0 inset-x-0 h-[calc(100%-theme(space.14))] overflow-y-auto bg-white">
+         <?php // Close Sefer ?>
          <div class="flex justify-end w-screen max-w-[80ch] px-4 mx-auto mt-clamp">
             <button
                 @click="closeSefer()"
@@ -28,7 +29,7 @@
          </div>
          <div class="w-screen max-w-[80ch] h-full px-4 mx-auto my-clamp">
             <?php // Sefer name ?>
-            <h2 class="mb-6 text-2xl" x-text="title"></h2>
+            <h2 class="mb-6 font-serif text-2xl" x-text="title"></h2>
 
             <?php // Chapters list ?>
             <ol class="flex flex-wrap gap-2">
@@ -37,7 +38,7 @@
                         <button
                             :data-chapter="'chapter-' + index"
                             @click="toggleChapter"
-                            class="grid place-content-center w-10 h-10 text-clampSm transition-colors hover:bg-slate-100"
+                            class="grid place-content-center w-10 h-10 text-sm transition-colors hover:bg-slate-100"
                             :class="chapterActive('chapter-' + index) ? 'bg-slate-200' : 'bg-slate-50 text-inherit'"
                             x-text="index + 1"></button>
                     </li>
@@ -47,8 +48,8 @@
             <?php // Chapters content ?>
             <template x-for="(chapters, index) in text" :key="index">
                 <template x-if="chapterActive('chapter-' + index)">
-                    <div class="chapter-container my-6">
-                        <h3 class="chapter-title my-6 text-xl">Chapitre  <span x-text="index + 1"></span></h3>
+                    <div class="my-6">
+                        <h3 class="my-6 font-serif text-xl">Chapitre  <span x-text="index + 1"></span></h3>
                         <div class="verses-container">
                             <template x-for="(chapter, index) in chapters" :key="index">
                                 <p x-text="chapter"
