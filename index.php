@@ -15,7 +15,7 @@
 
     <?php
         $books = array(
-            'Torah' => './torah.php',
+            'Torah - Les 5 livres de Moïse' => './torah.php',
             'Nevi\'im - Prophètes' => './prophetes.php',
             'Ketouvim - Hagiographes' => './hagiographes.php');
     ?>
@@ -25,7 +25,7 @@
 
         <?php foreach ($books as $key =>  $book): ?>
             <section class="mb-10">
-                <h2 class="pb-4 mb-4 border-b border-gray-200 text-2xl"><?php echo $key  ?></h2>
+                <h2 class="pb-4 mb-4 border-b border-slate-200 text-2xl text-slate-400"><?php echo $key  ?></h2>
                 <?php include ($book); ?>
             </section>
         <?php endforeach ?>
