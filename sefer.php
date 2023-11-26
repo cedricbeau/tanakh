@@ -19,6 +19,7 @@
 
     <?php // Sefer ?>
     <div x-show="open"
+         id="top"
          class="fixed top-14 bottom-0 inset-x-0 h-[calc(100%-theme(space.14))] overflow-y-auto bg-white">
          <div class="flex justify-end w-screen max-w-[80ch] px-4 mx-auto mt-clamp">
             <button
@@ -27,7 +28,7 @@
          </div>
          <div class="w-screen max-w-[80ch] h-full px-4 mx-auto my-clamp">
             <?php // Sefer name ?>
-            <h2 class="mb-4 text-2xl" x-text="title"></h2>
+            <h2 class="mb-6 text-2xl" x-text="title"></h2>
 
             <?php // Chapters list ?>
             <ol class="flex flex-wrap gap-2">
@@ -46,13 +47,17 @@
             <?php // Chapters content ?>
             <template x-for="(chapters, index) in text" :key="index">
                 <template x-if="chapterActive('chapter-' + index)">
-                    <div class="chapter-container my-4">
-                        <h3 class="chapter-title my-4 text-xl">Chapitre  <span x-text="index + 1"></span></h3>
+                    <div class="chapter-container my-6">
+                        <h3 class="chapter-title my-6 text-xl">Chapitre  <span x-text="index + 1"></span></h3>
                         <div class="verses-container">
                             <template x-for="(chapter, index) in chapters" :key="index">
                                 <p x-text="chapter"
                                     class="verse mb-2"></p>
                             </template>
+                        </div>
+                        <div class="flex justify-center pt-6 mt-6 border-t border-slate-200">
+                            <button @click="backToTop"
+                            class="py-2.5 px-4 border border-slate-200 rounded text-sm transition-colors hover:border-slate-400">Retour en haut de page</button>
                         </div>
                     </div>
                 </template>
@@ -98,6 +103,10 @@
 
             chapterActive (chapter) {
                 return chapter === this.chapter;
+            },
+
+            backToTop: function() {
+                document.getElementById('top').scrollTo({top: 0, behavior: 'smooth'})
             }
         }));
     });
