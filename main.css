@@ -560,6 +560,11 @@ video {
   margin-right: auto;
 }
 
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -568,16 +573,6 @@ video {
 .my-clamp {
   margin-top: clamp(1rem, 1.06vw + 0.99rem, 2rem);
   margin-bottom: clamp(1rem, 1.06vw + 0.99rem, 2rem);
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
 }
 
 .mb-1 {
@@ -604,24 +599,20 @@ video {
   margin-bottom: 1.5rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
+.ml-auto {
+  margin-left: auto;
 }
 
 .mr-auto {
   margin-right: auto;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .mt-clamp {
   margin-top: clamp(1rem, 1.06vw + 0.99rem, 2rem);
-}
-
-.mb-clamp {
-  margin-bottom: clamp(1rem, 1.06vw + 0.99rem, 2rem);
 }
 
 .block {
@@ -706,6 +697,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-items-center {
+  justify-items: center;
 }
 
 .gap-2 {
@@ -802,8 +797,8 @@ video {
   padding-top: 3.5rem;
 }
 
-.pt-6 {
-  padding-top: 1.5rem;
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .text-left {
@@ -833,8 +828,9 @@ video {
   line-height: 1.5rem;
 }
 
-.text-clampSm {
-  font-size: clamp(0.8rem, 0.42vw + 0.69rem, 1.03rem);
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -845,15 +841,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.font-semibold {
-  font-weight: 600;
 }
 
 .font-medium {
@@ -886,6 +873,14 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .transition-colors {

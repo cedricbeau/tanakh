@@ -36,10 +36,9 @@
                 <template x-for="(chapters, index) in text" :key="index">
                     <li class="w-10 h-10">
                         <button
-                            :data-chapter="'chapter-' + index"
-                            @click="toggleChapter"
+                            @click="toggleChapter(index)"
                             class="grid place-content-center w-10 h-10 text-sm transition-colors hover:bg-slate-100"
-                            :class="chapterActive('chapter-' + index) ? 'bg-slate-200' : 'bg-slate-50 text-inherit'"
+                            :class="chapterActive(index) ? 'bg-slate-200' : 'bg-slate-50 text-inherit'"
                             x-text="index + 1"></button>
                     </li>
                 </template>
@@ -47,16 +46,25 @@
 
             <?php // Chapters content ?>
             <template x-for="(chapters, index) in text" :key="index">
-                <template x-if="chapterActive('chapter-' + index)">
+                <template x-if="chapterActive(index)">
                     <div class="my-6">
                         <h3 class="my-6 font-serif text-xl">Chapitre  <span x-text="index + 1"></span></h3>
                         <div class="verses-container">
                             <template x-for="(chapter, index) in chapters" :key="index">
                                 <p x-text="chapter"
-                                    class="verse mb-2"></p>
+                                   class="verse mb-2"></p>
                             </template>
                         </div>
-                        <div class="flex justify-center pt-6 mt-6 border-t border-slate-200">
+                        <div class="flex justify-center items-center pt-8 mt-8 border-t border-slate-200">
+                            <button @click="prevHandler, $refs.top.scrollTo({top: 0, behavior: 'smooth'})"
+                                    :class="index == 0 ? 'opacity-0' : 'opacity-100'"
+                                    class="p-2 text-sm border border-slate-200 rounded">Précédent</button>
+                            <span class="mx-auto"><span x-text="index+1"></span>/<span x-text="text.length"></span></span>
+                            <button @click="nextHandler, $refs.top.scrollTo({top: 0, behavior: 'smooth'})"
+                                    :class="index == text.length - 1 ? 'opacity-0' : 'opacity-100'"
+                                    class="p-2 text-sm border border-slate-200 rounded">Suivant</button>
+                        </div>
+                        <div class="flex justify-center pt-8 mt-8 border-t border-slate-200">
                             <button @click="$refs.top.scrollTo({top: 0, behavior: 'smooth'})"
                             class="py-2.5 px-4 border border-slate-200 rounded text-sm transition-colors hover:border-slate-400">Retour en haut de page</button>
                         </div>
@@ -69,14 +77,15 @@
 
 <script>
     document.addEventListener('alpine:init', () => {
-
         Alpine.data('torah', () => ({
-
             title: '',
             text: [],
-            chapter: '',
+            chapter: 0,
             open: false,
 
+            /**
+             *
+             */
             loadSefer(defaultSefer) {
                 fetch(defaultSefer)
                 .then(response => response.json())
@@ -86,24 +95,77 @@
                 })
             },
 
+            /**
+             *
+             */
             openSefer() {
                 this.open = true;
                 document.body.classList.add('overflow-y-hidden');
             },
 
+            /**
+             *
+             */
             closeSefer() {
                 this.open = false;
                 this.text = [];
-                this.chapter = '';
+                this.chapter = 0;
                 document.body.classList.remove('overflow-y-hidden');
             },
 
-            toggleChapter (e) {
-                this.chapter = e.target.dataset.chapter;
+            /**
+             *
+             */
+            toggleChapter (index) {
+                this.chapter = index;
+
+                if (this.chapter == 0) {
+                    this.switchToIndex(this.text.length - 1);
+                } else {
+                    this.switchToIndex(this.chapter - 1);
+                }
+
+                if (this.currentIndex == this.text.length - 1) {
+                    this.switchToIndex(0);
+                } else {
+                    this.switchToIndex(this.chapter + 1);
+                }
             },
 
+            /**
+             *
+             */
             chapterActive (chapter) {
                 return chapter === this.chapter;
+            },
+
+            /**
+             *
+             */
+            switchToIndex(index) {
+                this.chapter = index;
+            },
+
+            /**
+             *
+             */
+            prevHandler: function(e) {
+                if (this.chapter == 0) {
+                    this.switchToIndex(this.text.length - 1);
+                } else {
+                    this.switchToIndex(this.chapter - 1);
+                }
+            },
+
+            /**
+             *
+             */
+            nextHandler: function(e) {
+                if (this.chapter == this.text.length - 1) {
+                    this.switchToIndex(1);
+                } else {
+                    this.switchToIndex(this.chapter + 1);
+                }
             }
         }));
     });
