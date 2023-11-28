@@ -19,7 +19,6 @@
 
     <?php // Sefer ?>
     <div x-show="open"
-         x-ref="top"
          class="fixed top-14 bottom-0 inset-x-0 h-[calc(100%-theme(space.14))] overflow-y-auto bg-white">
          <?php // Close Sefer ?>
          <div class="flex justify-end w-screen max-w-[80ch] px-4 mx-auto mt-clamp">
@@ -56,12 +55,12 @@
                             </template>
                         </div>
                         <div class="flex justify-center items-center pt-8 mt-8 border-t border-slate-200">
-                            <button @click="prevHandler, $refs.top.scrollTo({top: 0, behavior: 'smooth'})"
-                                    :class="index == 0 ? 'opacity-0' : 'opacity-100'"
+                            <button @click="prevHandler"
+                                    :class="index == 0 ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'"
                                     class="p-2 text-sm border border-slate-200 rounded">Précédent</button>
                             <span class="mx-auto"><span x-text="index+1"></span>/<span x-text="text.length"></span></span>
-                            <button @click="nextHandler, $refs.top.scrollTo({top: 0, behavior: 'smooth'})"
-                                    :class="index == text.length - 1 ? 'opacity-0' : 'opacity-100'"
+                            <button @click="nextHandler"
+                                    :class="index == text.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'"
                                     class="p-2 text-sm border border-slate-200 rounded">Suivant</button>
                         </div>
                         <div class="flex justify-center pt-8 mt-8 border-t border-slate-200">
@@ -118,18 +117,6 @@
              */
             toggleChapter (index) {
                 this.chapter = index;
-
-                if (this.chapter == 0) {
-                    this.switchToIndex(this.text.length - 1);
-                } else {
-                    this.switchToIndex(this.chapter - 1);
-                }
-
-                if (this.currentIndex == this.text.length - 1) {
-                    this.switchToIndex(0);
-                } else {
-                    this.switchToIndex(this.chapter + 1);
-                }
             },
 
             /**
@@ -142,18 +129,11 @@
             /**
              *
              */
-            switchToIndex(index) {
-                this.chapter = index;
-            },
-
-            /**
-             *
-             */
             prevHandler: function(e) {
                 if (this.chapter == 0) {
-                    this.switchToIndex(this.text.length - 1);
+                    this.toggleChapter(this.text.length - 1);
                 } else {
-                    this.switchToIndex(this.chapter - 1);
+                    this.toggleChapter(this.chapter - 1);
                 }
             },
 
@@ -162,9 +142,9 @@
              */
             nextHandler: function(e) {
                 if (this.chapter == this.text.length - 1) {
-                    this.switchToIndex(1);
+                    this.toggleChapter(1);
                 } else {
-                    this.switchToIndex(this.chapter + 1);
+                    this.toggleChapter(this.chapter + 1);
                 }
             }
         }));
