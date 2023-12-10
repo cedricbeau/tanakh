@@ -19,6 +19,7 @@
 
     <?php // Sefer ?>
     <div x-show="open"
+         x-ref="top"
          class="fixed top-14 bottom-0 inset-x-0 h-[calc(100%-theme(space.14))] overflow-y-auto bg-white">
          <?php // Close Sefer ?>
          <div class="flex justify-end w-screen max-w-[80ch] px-4 mx-auto mt-clamp">
@@ -73,80 +74,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('torah', () => ({
-            title: '',
-            text: [],
-            chapter: 0,
-            open: false,
-
-            /**
-             *
-             */
-            loadSefer(defaultSefer) {
-                fetch(defaultSefer)
-                .then(response => response.json())
-                .then(json => {
-                    this.title = json.title;
-                    this.text = json.text;
-                })
-            },
-
-            /**
-             *
-             */
-            openSefer() {
-                this.open = true;
-                document.body.classList.add('overflow-y-hidden');
-            },
-
-            /**
-             *
-             */
-            closeSefer() {
-                this.open = false;
-                this.text = [];
-                this.chapter = 0;
-                document.body.classList.remove('overflow-y-hidden');
-            },
-
-            /**
-             *
-             */
-            toggleChapter (index) {
-                this.chapter = index;
-            },
-
-            /**
-             *
-             */
-            chapterActive (chapter) {
-                return chapter === this.chapter;
-            },
-
-            /**
-             *
-             */
-            prevHandler: function(e) {
-                if (this.chapter == 0) {
-                    this.toggleChapter(this.text.length - 1);
-                } else {
-                    this.toggleChapter(this.chapter - 1);
-                }
-            },
-
-            /**
-             *
-             */
-            nextHandler: function(e) {
-                if (this.chapter == this.text.length - 1) {
-                    this.toggleChapter(1);
-                } else {
-                    this.toggleChapter(this.chapter + 1);
-                }
-            }
-        }));
-    });
-</script>
